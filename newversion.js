@@ -14,7 +14,7 @@ const sendApiRequest = async (timeout = 0) => {
 	return sortedData;
 };
 
-const wholeFunction = async (pricChange, volChange, pricText, pricDecText, volText, delay = 0) => {
+const bittrexFunc = async (pricChange, volChange, pricText, pricDecText, volText, delay) => {
 	const apiData = await sendApiRequest();
 	const tickers = Object.keys(apiData);
 
@@ -39,9 +39,9 @@ const wholeFunction = async (pricChange, volChange, pricText, pricDecText, volTe
 	if(priceDecrease.length) console.log(`⏰ ${currentDateTime()}\n${pricDecText}\n${priceDecrease.join("\n")}`);
 	if(volumeIncDec.length) console.log(`⏰ ${currentDateTime()}\n${volText}\n${volumeIncDec.join("\n")}`);
 
-	setTimeout(wholeFunction, 1000);
+	setTimeout(bittrexFunc, 1000, pricChange, volChange, pricText, pricDecText, volText, delay);
 };
 
-wholeFunction(5, 7, "⚡ Flash Pumps (last 10m):", "🌩 Flash Dumps (last 10m):", "📊 Volume Alerts (last 10m):", 600000); // 10 min
-wholeFunction(5, 10, "📈 Current Pumps (last 20m):", "📉 Current Dumps (last 20m):", "📊 Volume Alerts (last 20m):", 1200000); // 20 min
-wholeFunction(10, 10, "🐢 Slow Pumps (last 4h):", "🐌 Slow Dumps (last 4h):", "📊 Volume Alerts (last 4h):", 14400000); // 4 hour
+bittrexFunc(5, 7, "⚡ Flash Pumps (last 10m):", "🌩 Flash Dumps (last 10m):", "📊 Volume Alerts (last 10m):", 600000); // 10 min
+bittrexFunc(5, 10, "📈 Current Pumps (last 20m):", "📉 Current Dumps (last 20m):", "📊 Volume Alerts (last 20m):", 1200000); // 20 min
+bittrexFunc(10, 10, "🐢 Slow Pumps (last 4h):", "🐌 Slow Dumps (last 4h):", "📊 Volume Alerts (last 4h):", 14400000); // 4 hour
